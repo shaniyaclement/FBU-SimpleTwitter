@@ -65,12 +65,13 @@ public class TimelineActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.compose) {
-            // Compose icon has been selected
-            Toast.makeText(this, "Compose!", Toast.LENGTH_SHORT).show();
             //Navigate to the compose activity
+            Intent i = new Intent(this, ComposeActivity.class);
+            startActivity(i);
+            // We want to consume the tap of the menu item so we will return true
+            return true;
         }
-        // We want to consume the tap of the menu item so we will return true
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     private void populateHomeTimeline() {
