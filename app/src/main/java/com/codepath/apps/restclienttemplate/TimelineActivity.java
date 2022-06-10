@@ -1,6 +1,5 @@
 package com.codepath.apps.restclienttemplate;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,15 +7,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
+import com.codepath.apps.restclienttemplate.models.User;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
@@ -38,7 +37,7 @@ public class TimelineActivity extends AppCompatActivity {
     List<Tweet> tweets;
     TweetsAdapter adapter;
     SwipeRefreshLayout swipeContainer;
-    Button logout;
+    //EndlessRecyclerViewScrollListener scrollListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +45,7 @@ public class TimelineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_timeline);
 
         client = TwitterApp.getRestClient(this);
+
 
         //Find RecyclerView
         rvTweets = findViewById(R.id.rvTweets);
@@ -55,8 +55,20 @@ public class TimelineActivity extends AppCompatActivity {
         //RecyclerView setup: layout manger and adapter
         rvTweets.setLayoutManager(new LinearLayoutManager(this));
         rvTweets.setAdapter(adapter);
+
+        //scrollListener = new EndlessRecyclerViewScrollListener(layoutManager) {
+            //@Override
+           // public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+             //   loadMoreData();
+           // }
+       // };
+        //Adds scroll listener to RecyclerView
+      //  rv.Tweets.addOnScrollListener(scrollListener);
+
+
         populateHomeTimeline();
-        //onLogoutButton();
+
+
         // Lookup the swipe container view
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
         // Setup refresh listener which triggers new data loading
@@ -86,7 +98,6 @@ public class TimelineActivity extends AppCompatActivity {
                 // Remember to CLEAR OUT old items before appending in the new ones
                 adapter.clear();
                 // the data has come back, add new items to your adapter
-
                 adapter.addAll(tweets);
                 adapter.notifyDataSetChanged();
                 // Now we call setRefreshing(false) to signal refresh has finished
@@ -145,7 +156,7 @@ public class TimelineActivity extends AppCompatActivity {
                 JSONArray jsonArray = json.jsonArray;
                 try {
                     tweets.addAll(Tweet.fromJsonArray(jsonArray));
-                    adapter.notifyDataSetChanged();;
+                    adapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     Log.e(TAG, "JSON Exception", e);
                     e.printStackTrace();

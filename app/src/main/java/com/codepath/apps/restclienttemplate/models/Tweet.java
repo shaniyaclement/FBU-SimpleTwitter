@@ -2,6 +2,12 @@ package com.codepath.apps.restclienttemplate.models;
 
 import android.util.Log;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,6 +19,7 @@ import java.util.List;
 @Parcel
 public class Tweet {
 
+    public long id;
     public String body;
     public String createdAt;
     public String mediaURL;
@@ -30,6 +37,7 @@ public class Tweet {
             tweet.body = jsonObject.getString("text");
         }
         tweet.createdAt = jsonObject.getString("created_at");
+        tweet.id = jsonObject.getLong("id");
         // adds image into the Java tweet if there is one in the JSON
         if(jsonObject.getJSONObject("entities").has("media")) {
             tweet.mediaURL = jsonObject.getJSONObject("entities").getJSONArray("media").getJSONObject(0).getString("media_url_https");
@@ -37,7 +45,8 @@ public class Tweet {
         } else{
             tweet.mediaURL = "null";
         }
-        tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
+        User user = User.fromJson(jsonObject.getJSONObject("user"));
+        tweet.user = user;
         return tweet;
     }
 

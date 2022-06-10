@@ -34,6 +34,8 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="2dp"
         android:layout_toEndOf="@+id/ivProfileImage"
+        android:autoLink="all"
+        android:linksClickable="true"
         tools:text="SZA and Summer Walker hits different!! They are such a vibe" />
 
     <ImageView
@@ -45,5 +47,24 @@
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageButton
+        android:id="@+id/ibFavorite"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/ivTweetImg"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/ivProfileImage"
+        app:srcCompat="@android:drawable/btn_star_big_off" />
+
+    <TextView
+        android:id="@+id/tvFavorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ibFavorite"
+        android:layout_alignParentBottom="false"
+        android:layout_marginStart="2dp"
+        android:layout_toEndOf="@+id/ibFavorite"
+        tools:text="0" />
 
 </RelativeLayout>

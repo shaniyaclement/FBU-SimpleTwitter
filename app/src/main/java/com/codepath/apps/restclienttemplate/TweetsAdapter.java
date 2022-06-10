@@ -112,7 +112,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvScreenName.setText(tweet.user.screenName);
             Glide.with(context).load(tweet.user.profileImageUrl).into(ivProfileImage);
             // if there is no image included in the tweet we don't want it to show space for an image
-            // so we make the image GONE in visiblity to account for that
+            // so we make the image GONE in visibility to account for that
             if(tweet.mediaURL.equals("null")) {
                 ivTweetImg.setVisibility(View.GONE);
             } else {
