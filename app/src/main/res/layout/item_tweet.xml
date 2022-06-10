@@ -35,4 +35,15 @@
         android:layout_marginTop="2dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         tools:text="SZA and Summer Walker hits different!! They are such a vibe" />
+
+    <ImageView
+        android:id="@+id/ivTweetImg"
+        android:layout_width="257dp"
+        android:layout_height="135dp"
+        android:layout_below="@+id/tvBody"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/ivProfileImage"
+        tools:srcCompat="@tools:sample/avatars" />
+
 </RelativeLayout>

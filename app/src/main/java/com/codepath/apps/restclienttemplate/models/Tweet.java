@@ -1,5 +1,7 @@
 package com.codepath.apps.restclienttemplate.models;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,6 +15,7 @@ public class Tweet {
 
     public String body;
     public String createdAt;
+    public String mediaURL;
     public User user;
 
     // empty constructor needed by the Parceler library
@@ -21,8 +24,19 @@ public class Tweet {
     //Given the JSON object representing the tweet we want to turn it into a Java tweet object
     public static Tweet fromJson(JSONObject jsonObject) throws JSONException {
         Tweet tweet = new Tweet();
-        tweet.body = jsonObject.getString("text");
+        if(jsonObject.has("full_text")) {
+            tweet.body = jsonObject.getString("full_text");
+        } else {
+            tweet.body = jsonObject.getString("text");
+        }
         tweet.createdAt = jsonObject.getString("created_at");
+        // adds image into the Java tweet if there is one in the JSON
+        if(jsonObject.getJSONObject("entities").has("media")) {
+            tweet.mediaURL = jsonObject.getJSONObject("entities").getJSONArray("media").getJSONObject(0).getString("media_url_https");
+            Log.i("Tweet", tweet.mediaURL);
+        } else{
+            tweet.mediaURL = "null";
+        }
         tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
         return tweet;
     }

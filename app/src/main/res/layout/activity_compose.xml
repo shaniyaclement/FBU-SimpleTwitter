@@ -7,28 +7,46 @@
     android:layout_height="match_parent"
     tools:context=".ComposeActivity">
 
-    <EditText
-        android:id="@+id/etCompose"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="@string/what_s_happening"
-        android:inputType="textMultiLine"
-        android:minLines="5"
-        android:textColorHint="#546E7A" />
+        app:counterEnabled="true"
+        app:counterMaxLength="280"
+        app:counterOverflowTextAppearance="@style/counterOverride"
+        app:counterTextAppearance="@style/counterText">
+
+        <EditText
+            android:id="@+id/etCompose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:ems="280"
+            android:gravity="start|top"
+            android:hint="@string/what_s_happening"
+            android:inputType="textMultiLine"
+            android:maxEms="280"
+            android:minLines="5"
+            android:textColorHint="#546E7A"
+            app:counterEnabled="true"
+            app:counterMaxLength="280"
+            app:counterOverflowTextAppearance="@style/counterOverride"
+            app:counterTextAppearance="@style/counterText" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnTweet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etCompose"
+        android:layout_below="@+id/TextInputLayout"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
         android:text="@string/tweet" />
+
+
 </RelativeLayout>

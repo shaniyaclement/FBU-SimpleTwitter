@@ -50,6 +50,8 @@ public class TwitterClient extends OAuthBaseClient {
 		RequestParams params = new RequestParams();
 		params.put("count", 25);
 		params.put("since_id", 1);
+		// added to try to add image
+		params.put("tweet_mode", "extended");
 		client.get(apiUrl, params, handler);
 	}
 
